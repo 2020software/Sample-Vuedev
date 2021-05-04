@@ -67,10 +67,12 @@ export default {
       };
     },
 
+    // delete　は destroy.js で オリジナルメソッドの呼び出し
     delete () {
       axios.delete(this.endpoint)
         .then(res => {
           this.$toast.success(res.data.message, "Success", { timeout: 2000 });
+          // Answers.vue
           this.$emit('deleted')
         });
     }

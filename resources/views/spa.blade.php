@@ -21,9 +21,7 @@
     <div id="app" class="home-screen">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    SampleQ&A
-                </a>
+                <router-link class="navbar-brand" :to="{ name: 'home' }">Sample Q/A</router-link>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -36,6 +34,8 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                            <router-link class="nav-item" tag="li" :to="{ name: 'questions' }"><a class="nav-link">質問一覧</a></router-link>
+                            <router-link class="nav-item" tag="li" :to="{ name: 'my-posts' }"><a class="nav-link">My投稿</a></router-link>
                         <!-- Authentication Links -->
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('ログイン') }}</a></li>
@@ -66,17 +66,21 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <router-view></router-view>
         </main>
     </div>
 
     <!-- Scripts -->
     <script>
-        // jsonに変換
-        window.Auth = {!! json_encode([     // Authファザード
+        // jsonブレードディレクティブでjson形式データが入ったデータの呼び出し
+        window.Auth = @json([     // Authファザード
             'signedIn' => Auth::check(),  // ログインしているか判定
-            'user' => Auth::user()  // ログイン中のユーザー情報
-        ]) !!}
+            'user' => Auth::user(),  // ログイン中のユーザー情報
+        ]);
+        window.Urls = @json([
+            'api' => url('/api'),
+            'login' => route('login')   // ログインページへ
+        ]);
     </script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 </body>

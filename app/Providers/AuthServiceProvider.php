@@ -8,6 +8,8 @@ use App\Question;
 use App\Policies\QuestionPolicy;
 use App\Answer;
 use App\Policies\AnswerPolicy;
+use Laravel\Passport\Passport;
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Question::class => QuestionPolicy::class,
         Answer::class => AnswerPolicy::class,
+        'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
@@ -29,6 +32,8 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
+        Passport::routes();
 
         \Gate::define('update-question', function($user, $question) {
             return $user->id === $question->user_id;

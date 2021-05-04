@@ -23,8 +23,9 @@
 </template>
 
 <script>
-import Answer from './Answer.vue';
-import NewAnswer from './NewAnswer.vue';
+import EventBus from '../event-bus'
+import Answer from './Answer.vue'
+import NewAnswer from './NewAnswer.vue'
 
 export default {
     props: ['question'],
@@ -46,11 +47,17 @@ export default {
         add(answer) {
             this.answers.push(answer);
             this.count++;
+            if (this.count === 1) {
+                EventBus.$emit('answers-count-changed', this.count)
+            }
         },
         
         remove (index) {
             this.answers.splice(index, 1);
             this.count--;
+            if (this.count === 0) {
+                EventBus.$emit('answers-count-changed', this.count)
+            }
         },
 
         fetch (endpoint) {
@@ -58,7 +65,7 @@ export default {
                 .then(({ data }) => {
                     // ...で配列をデータ化する
                     this.answers.push(...data.data);
-                    this.nextUrl = data.next_page_url;
+                    this.nextUrl = data.links.next;
                 })
         }
     },

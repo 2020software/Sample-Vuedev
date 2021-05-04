@@ -14,6 +14,7 @@
  import VueIziToast from 'vue-izitoast';
  import 'izitoast/dist/css/iziToast.min.css';
  import Authorization from './authorization/authorize';
+ import router from './router';
 
  Vue.use(VueIziToast);
  Vue.use(Authorization);
@@ -38,5 +39,6 @@
   */
  
  const app = new Vue({
-     el: '#app'
+     el: '#app',
+     router
  });
