@@ -24,7 +24,7 @@
                         <div class="d-flex align-items-center">
                             <h1>{{ title }}</h1>
                             <div class="ml-auto">
-                                <a href="/questions" class="btn btn-outline-secondary">ホームへ戻る</a>
+                                <router-link exact :to="{ name: 'questions' }" class="btn btn-outline-secondary">質問ページ</router-link>
                             </div>
                         </div>
                     </div>

@@ -11,15 +11,21 @@
 |
 */
 
+// ルーティングの設定は先に書かれたやつのほうが優先度が高い
+
 // 404 Not Found はルーティング設定に問題あり
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
-Auth::routes(['verify' => true]);
+// メールアドレス確認はしない
+// Auth::routes(['verify' => true]);
 
-Route::view('/{any}', 'spa')->where('any', '.*');
+Auth::routes();
+
+// whereでパラメータを正規表現バリデーション出来る
+Route::view('/{any}', 'spa')->where('any', '.*');   // spa.blade.phpを指定
 
 Route::get('/', 'QuestionsController@index');
 

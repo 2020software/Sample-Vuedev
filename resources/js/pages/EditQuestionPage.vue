@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h2>質問をする</h2>
+                            <h2>質問を編集...</h2>
                             <div class="ml-auto">
                                 <router-link :to="{ name: 'questions' }" class="btn btn-outline-secondary">すべての質問へ戻る</router-link>
                             </div>

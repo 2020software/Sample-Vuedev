@@ -21,8 +21,11 @@ try {
 
 window.axios = require('axios');
 
+/* JavaScript の HTTP 通信ライブラリである axios がデフォルトで HTTP リクエストヘッダに
+ X-Requested-With というキーで XMLHttpRequest という値を埋め込む    */
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.baseURL = window.Urls.api || 'http://localhost:8000/api';
+// axios.get('/questions')
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that

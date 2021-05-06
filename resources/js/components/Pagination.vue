@@ -15,8 +15,9 @@
 <script>
 export default {
     // Questions.vueからprops
-    props: ['meta', 'links'],
+    props: ['meta', 'links'],   // meta はページの情報やURL
 
+    // ページ数の操作は算出プロパティなのでcomputed
     computed: {
         pagesInfo () {
             return `${this.meta.current_page} / ${this.meta.last_page}`

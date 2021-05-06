@@ -43,8 +43,8 @@ export default {
             axios.get('/questions', { params: this.$route.query })
                 .then(({ data }) => {
                     this.questions = data.data
-                    this.meta = data.meta;
-                    this.links = data.links
+                    this.meta = data.meta;  // meta はページの情報やURL
+                    this.links = data.links // links は前後と現在のURL
                 })
         },
 
@@ -54,6 +54,7 @@ export default {
         }
     },
 
+    // ルートが変更されるたびに変更を監視する
     watch: {
         "$route": 'fetchQuestions'
     }

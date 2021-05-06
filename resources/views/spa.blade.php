@@ -8,7 +8,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'SampleQ/A') }}</title>
+
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -35,7 +37,6 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                             <router-link class="nav-item" tag="li" :to="{ name: 'questions' }"><a class="nav-link">質問一覧</a></router-link>
-                            <router-link class="nav-item" tag="li" :to="{ name: 'my-posts' }"><a class="nav-link">My投稿</a></router-link>
                         <!-- Authentication Links -->
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('ログイン') }}</a></li>
@@ -66,7 +67,9 @@
         </nav>
 
         <main class="py-4">
-            <router-view></router-view>
+            <transition name="fade" mode="out-in">
+                <router-view></router-view>
+            </transition>
         </main>
     </div>
 
@@ -79,7 +82,7 @@
         ]);
         window.Urls = @json([
             'api' => url('/api'),
-            'login' => route('login')   // ログインページへ
+            'login' => route('login')   // index.jsでログインが必要なページはログインページへ
         ]);
     </script>
     <script src="{{ asset('js/app.js') }}" defer></script>

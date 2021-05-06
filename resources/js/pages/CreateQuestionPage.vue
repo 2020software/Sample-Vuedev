@@ -37,7 +37,7 @@ export default {
                     this.$toast.success(data.message, "Success")
                 })
                 .catch(({ response }) => {
-                    //  エラーメッセージをQuestionForm.vueに送り返す
+                    //  The title field is required.をQuestionForm.vueに送り返す
                     EventBus.$emit('error', response.data.errors)
                 })
         }

@@ -1,5 +1,5 @@
 export default {
-    // 編集. 削除. その他
+    // 編集. 更新
     modify (user, model) {
         return user.id === model.user.id;
     },
@@ -10,6 +10,7 @@ export default {
     },
 
     deleteQuestion (user, question) {
+        // 回答が0の質問のみ削除可能
         return user.id === question.user.id && question.answers_count < 1;
     }
 }

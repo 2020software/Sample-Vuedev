@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Answer;
 use App\Question;
 use App\Http\Controllers\Controller;
-use App\Http\Resource\AnswerResource;
+use App\Http\Resources\AnswerResource;
 use Illuminate\Http\Request;
 
 class AnswersController extends Controller

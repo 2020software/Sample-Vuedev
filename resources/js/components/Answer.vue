@@ -3,7 +3,7 @@
         <vote :model="answer" name="answer"></vote>
 
         <div class="media-body">
-            <form v-if="editing" @submit.prevent="update">  <!-- Answer.vue - updateメソッド呼び出し -->
+            <form v-if="editing" @submit.prevent="update">  <!-- modification.js - updateメソッド呼び出し -->
                 <div class="form-group">
                     <textarea class="form-control" v-model="body" rows="10" required></textarea>
                 </div>

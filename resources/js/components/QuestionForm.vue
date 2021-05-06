@@ -25,6 +25,7 @@
 <script>
 import EventBus from '../event-bus'
 export default {
+    // pages/EditQuestionPage
     props: {
         isEdit: {
             type: Boolean,

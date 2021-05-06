@@ -10973,6 +10973,11 @@ body {
   height: 60px;
 }
 
+.counters .status {
+  /* 回答数の枠線のみ緑色 */
+  /* 回答数が緑 */
+}
+
 .counters .status.unanswered {
   border: none;
 }
@@ -11045,4 +11050,35 @@ form.form-delete {
 [v-cloak] {
   display: none;
 }
+
+/* アニメーション中(active状態)のスタイル */
+
+/* linear 開始から終了まで一定に変化 */
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s linear;
+}
+
+/*  
+    enter = 表示アニメーション
+    leave = 非表示アニメーション
+    enterの開始状態
+    leaveの終了状態 
+*/
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Vue Transition時に付与されるクラス
+    要素が表示されるとき
+        v-enter -> v-enter-active -> v-enter-to
+    要素が非表示されるとき
+        v-leave -> v-leave-active -> v-enter-to
+*/
+
+/* transitionコンポーネントの name 属性に任意の文字を与えれば
+    付与されるクラスの v- が置き換えられる */
 
