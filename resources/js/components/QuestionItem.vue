@@ -14,6 +14,7 @@
     <div class="media-body">
         <div class="d-flex align-items-center">
             <h3 class="mt-0">
+                <!-- paramsはクエリ(?)より前の部分で省略できないパスパラメータのこと -->
                 <router-link :to="{ name: 'questions.show', params: { slug: question.slug } }">{{ question.title }}</router-link>
             </h3>
             <div class="ml-auto">

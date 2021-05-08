@@ -1,4 +1,5 @@
 <template>
+    <!-- v-ifで質問の存在を確かめないとエラー -->
     <div class="container" v-if="question.id">
         <question :question="question"></question>
         <answers :question="question"></answers>
@@ -12,7 +13,7 @@ import Answers from '../components/Answers.vue';
 export default {
     components: { Question, Answers },
 
-    props: ['slug'],
+    props: ['slug'],    // QuestionItemのrouter-linkから
 
     data () {
         return {

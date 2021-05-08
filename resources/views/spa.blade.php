@@ -36,7 +36,6 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                            <router-link class="nav-item" tag="li" :to="{ name: 'questions' }"><a class="nav-link">質問一覧</a></router-link>
                         <!-- Authentication Links -->
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('ログイン') }}</a></li>

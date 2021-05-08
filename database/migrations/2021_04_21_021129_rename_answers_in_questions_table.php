@@ -11,6 +11,7 @@ class RenameAnswersInQuestionsTable extends Migration
      *
      * @return void
      */
+    // renameはdoctrine/dbalをインストール
     public function up()
     {
         Schema::table('questions', function (Blueprint $table) {

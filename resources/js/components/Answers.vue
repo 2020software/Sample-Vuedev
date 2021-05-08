@@ -65,7 +65,7 @@ export default {
                 .then(({ data }) => {
                     // ...で配列をデータ化する
                     this.answers.push(...data.data);
-                    this.nextUrl = data.links.next;
+                    this.nextUrl = data.links.next; // linksで回答を読み込むボタン表示
                 })
         }
     },

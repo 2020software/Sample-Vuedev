@@ -26,22 +26,22 @@ const routes = [
         path: '/questions/create',
         component: CreateQuestionPage,
         name: 'questions.create',
-        meta: {     // ユーザーが正常にログインした場合にのみアクセス
-            requiresAuth: true
+        meta: {     
+            requiresAuth: true  // ユーザーが正常にログインした場合にのみアクセス
         }
     },
     {
-        path: '/questoins/:id/edit',
+        path: '/questoins/:id/edit',    // :idはslugの数字部分
         component: EditQuestionPage,
         name: 'questions.edit'
     },
     {
-        path: '/questions/:slug',   // {slug}
+        path: '/questions/:slug',   // URLパスパラメータ
         component: QuestionPage,
         name: 'questions.show',
-        props: true,
-        meta: {     // ユーザーが正常にログインした場合にのみアクセス
-            requiresAuth: true
+        props: true,    // router-linkでpropsに値を渡してURL遷移する
+        meta: {     
+            requiresAuth: true  // ユーザーが正常にログインした場合にのみアクセス
         }
     },
     {

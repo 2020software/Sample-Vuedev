@@ -18,7 +18,7 @@ class Question extends Model
     protected $appends = ['created_date', 'is_favorited', 'favorites_count', 'body_html'];
 
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);   // questionのuser_idをuserのid
     }
 
     public function setTitleAttribute($value)
@@ -45,6 +45,7 @@ class Question extends Model
 
     public function getStatusAttribute()
     {
+        // answersカラムがanswers_countにネーム変更
         if ($this->answers_count > 0) {
             if ($this->best_answer_id) {
                 return "answered-accepted";
@@ -59,9 +60,9 @@ class Question extends Model
         return clean($this->bodyHtml());
     }
 
-    public function answers()
+    public function answers()   // hasManyは主キーから外部キーへつなぐ
     {
-        return $this->hasMany(Answer::class)->orderBy('votes_count', 'DESC');
+        return $this->hasMany(Answer::class)->orderBy('votes_count', 'DESC');   // グッドが多い順
     }
 
     public function acceptBestAnswer(Answer $answer)
@@ -70,7 +71,7 @@ class Question extends Model
         $this->save();
     }
 
-    public function favorites()
+    public function favorites() //belongsは外部キーから主キーへつなぐ
     {
         return $this->belongsToMany(User::class, 'favorites')->withTimestamps(); // , 'questoin_id', 'user_id');
     }

@@ -40,9 +40,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function questions()
+    public function questions() // 関係メソッド hasMany = 1対多 だからメソッド名が複数形
     {
-        return $this->hasMany(Question::class);
+        return $this->hasMany(Question::class); // $this=userテーブルのid Question::class=Questionsテーブルのuser_id
     }
 
     public function getUrlAttribute()
@@ -50,9 +50,9 @@ class User extends Authenticatable
         return '#';
     }
 
-    public function answers()
+    public function answers()   // 関係メソッド hasMany = 1対多 だからメソッド名が複数形
     {
-        return $this->hasMany(Answer::class);
+        return $this->hasMany(Answer::class);   // $this=userテーブルのid Answer::class=Answersテーブルのuser_id
     }
 
     public function posts()
@@ -109,13 +109,14 @@ class User extends Authenticatable
     }
 
     public function favorites()
+
     {
-        return $this->belongsToMany(Question::class, 'favorites')->withTimestamps(); // , 'author_id', 'question_id');
+        return $this->belongsToMany(Question::class, 'favorites')->withTimestamps();  // Question::class=リレーション先モデル名 'favorites'=リレーション先テーブル名
     }
 
     public function voteQuestions()
     {
-        return $this->morphedByMany(Question::class, 'votable');    // 第一引数はモデル名
+        return $this->morphedByMany(Question::class, 'votable');    // 第一引数は接続先モデル名 第二引数は中間テーブル
     }
 
     public function voteAnswers()
