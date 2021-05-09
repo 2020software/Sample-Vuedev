@@ -11714,7 +11714,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         // ...で配列をデータ化する
         (_this$answers = _this.answers).push.apply(_this$answers, _toConsumableArray(data.data));
 
-        _this.nextUrl = data.links.next;
+        _this.nextUrl = data.links.next; // linksで回答を読み込むボタン表示
       });
     }
   },
@@ -11896,6 +11896,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   // Questions.vueからprops
   props: ['meta', 'links'],
+  // meta はページの情報やURL
+  // ページ数の操作は算出プロパティなのでcomputed
   computed: {
     pagesInfo: function pagesInfo() {
       return "".concat(this.meta.current_page, " / ").concat(this.meta.last_page);
@@ -12115,6 +12117,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  // pages/EditQuestionPage
   props: {
     isEdit: {
       type: Boolean,
@@ -12188,6 +12191,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_destroy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../mixins/destroy */ "./resources/js/mixins/destroy.js");
+//
 //
 //
 //
@@ -12304,8 +12308,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (_ref) {
         var data = _ref.data;
         _this.questions = data.data;
-        _this.meta = data.meta;
-        _this.links = data.links;
+        _this.meta = data.meta; // meta はページの情報やURL
+
+        _this.links = data.links; // links は前後と現在のURL
       });
     },
     remove: function remove(index) {
@@ -12313,6 +12318,7 @@ __webpack_require__.r(__webpack_exports__);
       this.count--;
     }
   },
+  // ルートが変更されるたびに変更を監視する
   watch: {
     "$route": 'fetchQuestions'
   }
@@ -12514,7 +12520,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.$toast.success(data.message, "Success");
       })["catch"](function (_ref2) {
         var response = _ref2.response;
-        //  エラーメッセージをQuestionForm.vueに送り返す
+        //  The title field is required.をQuestionForm.vueに送り返す
         _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('error', response.data.errors);
       });
     }
@@ -12606,6 +12612,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -12614,6 +12621,7 @@ __webpack_require__.r(__webpack_exports__);
     Answers: _components_Answers_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: ['slug'],
+  // QuestionItemのrouter-linkから
   data: function data() {
     return {
       question: {
@@ -50139,7 +50147,7 @@ var render = function() {
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
             _c("div", { staticClass: "d-flex align-items-center" }, [
-              _c("h2", [_vm._v("質問をする")]),
+              _c("h2", [_vm._v("質問を編集...")]),
               _vm._v(" "),
               _c(
                 "div",
@@ -65710,6 +65718,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /* harmony default export */ __webpack_exports__["default"] = ({
   install: function install(Vue, options) {
     Vue.prototype.authorize = function (policy, model) {
+      // policy = policies.js
       if (!window.Auth.signedIn) return false;
 
       if (typeof policy === 'string' && _typeof(model) === 'object') {
@@ -65734,7 +65743,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  // 編集. 削除. その他
+  // 編集. 更新
   modify: function modify(user, model) {
     return user.id === model.user.id;
   },
@@ -65743,6 +65752,7 @@ __webpack_require__.r(__webpack_exports__);
     return user.id === answer.question_user_id;
   },
   deleteQuestion: function deleteQuestion(user, question) {
+    // 回答が0の質問のみ削除可能
     return user.id === question.user.id && question.answers_count < 1;
   }
 });
@@ -65777,8 +65787,12 @@ try {
 
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* JavaScript の HTTP 通信ライブラリの axios がデフォルトで HTTP リクエストヘッダに
+ X-Requested-With というキーで XMLHttpRequest という値を埋め込む    */
+
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.baseURL = window.Urls.api || 'http://localhost:8000/api';
+window.axios.defaults.baseURL = window.Urls.api || 'http://localhost:8000/api'; // axios.get('/questions')
+
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
  * all outgoing HTTP requests automatically have it attached. This is just
@@ -67179,22 +67193,24 @@ var routes = [{
   component: _pages_CreateQuestionPage_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
   name: 'questions.create',
   meta: {
-    // ユーザーが正常にログインした場合にのみアクセス
-    requiresAuth: true
+    requiresAuth: true // ユーザーが正常にログインした場合にのみアクセス
+
   }
 }, {
   path: '/questoins/:id/edit',
+  // :idはslugの数字部分
   component: _pages_EditQuestionPage_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
   name: 'questions.edit'
 }, {
   path: '/questions/:slug',
-  // {slug}
+  // URLパスパラメータ
   component: _pages_QuestionPage_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
   name: 'questions.show',
   props: true,
+  // router-linkでpropsに値を渡してURL遷移する
   meta: {
-    // ユーザーが正常にログインした場合にのみMy投稿にアクセス
-    requiresAuth: true
+    requiresAuth: true // ユーザーが正常にログインした場合にのみアクセス
+
   }
 }, {
   path: '*',

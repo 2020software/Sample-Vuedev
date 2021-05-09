@@ -65,7 +65,7 @@ export default {
         },
 
         voteDown () {
-            this._vote(0);
+            this._vote(-1);
         },
 
         _vote (vote) {
@@ -77,7 +77,7 @@ export default {
 
                 return;
             }
-            axios.post(this.endpoint, { vote })
+            axios.post(this.endpoint, { vote }) // VoteAnswerController.php の vote
                 .then(res => {
                     this.$toast.success(res.data.message, "Success", {
                         timeout: 3000,

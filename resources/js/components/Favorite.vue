@@ -9,7 +9,6 @@
 </template>
 
 <script>
-// _vote.blade.phpで使用
 export default {
     // Question.php
     props: ['question'],
@@ -25,7 +24,7 @@ export default {
     computed: {
         classes () {
             return [
-                'favorite', 'mt-2',
+                'favorite', 'mt-2', // 2つのクラス付与
                 this.signedIn ? (this.isFavorited ? 'favorited' : '') : 'off'
             ];
         },
@@ -36,7 +35,6 @@ export default {
     },
 
     methods: {
-        // favoritedクラス付与
         toggle () {
             if (! this.signedIn) {
                 this.$toast.warning('ログインが必要です', 'Warning', {

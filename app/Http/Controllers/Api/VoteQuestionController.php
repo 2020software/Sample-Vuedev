@@ -14,7 +14,7 @@ class VoteQuestionController extends Controller
         $votesCount = auth()->user()->voteQuestion($question, $vote);
 
         return response()->json([
-            'message' => 'Thanks for the feedback',
+            'message' => 'フィードバック済',
             'votesCount' => $votesCount
         ]);
     }

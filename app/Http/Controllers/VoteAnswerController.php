@@ -8,8 +8,9 @@ use App\Answer;
 class VoteAnswerController extends Controller
 {
     public function __construct()
+    // コントローラー全体にミドルウェアを指定
     {
-        $this->middleware('auth');
+        $this->middleware('auth');  // ログイン認証をかける
     }
 
     public function __invoke(Answer $answer)

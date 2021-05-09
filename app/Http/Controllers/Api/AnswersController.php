@@ -29,7 +29,7 @@ class AnswersController extends Controller
         ]) + ['user_id' => \Auth::id()]);
 
         return response()->json([
-            'message' => "Your answer has been submitted successfully",
+            'message' => "回答が追加できました",
             'answer' => new AnswerResource($answer->load('user'))
         ]);
     }
@@ -50,7 +50,7 @@ class AnswersController extends Controller
         ]));
 
         return response()->json([
-            'message' => 'Your answer has been updated',
+            'message' => '回答が更新されました',
             'body_html' => $answer->body_html
         ]);
     }
@@ -68,7 +68,7 @@ class AnswersController extends Controller
         $answer->delete();
 
         return response()->json([
-            'message' => "Your answer has been removed"
+            'message' => "回答が消されました"
         ]);
     }
 }

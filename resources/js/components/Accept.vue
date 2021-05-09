@@ -29,11 +29,15 @@ export default {
         }
     },
 
+    // created = インスタンスが作成された後で実行
     created () {
+        // $onは$emitで登録したイベントを
         EventBus.$on('accepted', id => {
-            this.isBest = (id === this.id);
-        })
+            this.isBest = (id === this.id); // イベントペイロードと回答IDを一致
+        })  // これにより、一つの回答だけにグリーンチェックが可能に
     },
+
+
 
     methods: {
         create () {
@@ -46,7 +50,7 @@ export default {
 
                     this.isBest = true;
 
-                    EventBus.$emit('accepted', this.id);
+                    EventBus.$emit('accepted', this.id);    // $emit イベント登録
                 })
         }
     },
