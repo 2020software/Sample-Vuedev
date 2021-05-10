@@ -11482,12 +11482,14 @@ __webpack_require__.r(__webpack_exports__);
       id: this.answer.id
     };
   },
+  // created = インスタンスが作成された後で実行
   created: function created() {
     var _this = this;
 
+    // $onは$emitで登録したイベントを
     _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$on('accepted', function (id) {
-      _this.isBest = id === _this.id;
-    });
+      _this.isBest = id === _this.id; // イベントペイロードと回答IDを一致
+    }); // これにより、一つの回答だけにグリーンチェックが可能に
   },
   methods: {
     create: function create() {
@@ -11500,7 +11502,7 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         _this2.isBest = true;
-        _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('accepted', _this2.id);
+        _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('accepted', _this2.id); // $emit イベント登録
       });
     }
   },
@@ -11750,7 +11752,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-// _vote.blade.phpで使用
 /* harmony default export */ __webpack_exports__["default"] = ({
   // Question.php
   props: ['question'],
@@ -11763,14 +11764,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     classes: function classes() {
-      return ['favorite', 'mt-2', this.signedIn ? this.isFavorited ? 'favorited' : '' : 'off'];
+      return ['favorite', 'mt-2', // 2つのクラス付与
+      this.signedIn ? this.isFavorited ? 'favorited' : '' : 'off'];
     },
     endpoint: function endpoint() {
       return "/questions/".concat(this.id, "/favorites");
     }
   },
   methods: {
-    // favoritedクラス付与
     toggle: function toggle() {
       if (!this.signedIn) {
         this.$toast.warning('ログインが必要です', 'Warning', {
@@ -12435,7 +12436,7 @@ __webpack_require__.r(__webpack_exports__);
       this._vote(1);
     },
     voteDown: function voteDown() {
-      this._vote(0);
+      this._vote(-1);
     },
     _vote: function _vote(vote) {
       var _this = this;
@@ -12450,7 +12451,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post(this.endpoint, {
         vote: vote
-      }).then(function (res) {
+      }) // VoteAnswerController.php の vote
+      .then(function (res) {
         _this.$toast.success(res.data.message, "Success", {
           timeout: 3000,
           position: 'bottomLeft'
@@ -65743,7 +65745,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  // 編集. 更新
+  // 編集. 更新. 削除 | model = Answer, Question
   modify: function modify(user, model) {
     return user.id === model.user.id;
   },
@@ -65751,6 +65753,7 @@ __webpack_require__.r(__webpack_exports__);
   accept: function accept(user, answer) {
     return user.id === answer.question_user_id;
   },
+  // 回答がすべてなくなってから質問も削除できるので、 modify とはまた別
   deleteQuestion: function deleteQuestion(user, question) {
     // 回答が0の質問のみ削除可能
     return user.id === question.user.id && question.answers_count < 1;
