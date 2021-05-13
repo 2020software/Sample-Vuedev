@@ -15,6 +15,10 @@ class QuestionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // 質問を表示する
+    // Postman [ GET Displau all Questions ]
+    
     public function index()
     {
         // Question.php
@@ -22,6 +26,8 @@ class QuestionsController extends Controller
         $questions = Question::with('user')->latest()->paginate(5);
 
         return QuestionResource::collection($questions);
+
+        // QuestionResource は JSONレスポンスを返すときにJSONのdataを成形する物
     }
 
     /**
@@ -30,6 +36,10 @@ class QuestionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    // 新しい質問を追加するためのAPIエンドポイント
+    // Postman [ POST Create Question ]
+    
     public function store(AskQuestionRequest $request)
     {
         $question = $request->user()->questions()->create($request->only('title', 'body'));
@@ -46,6 +56,9 @@ class QuestionsController extends Controller
      * @param  \App\question  $question
      * @return \Illuminate\Http\Response
      */
+
+    // Postman [ GET Show Question ]
+
     public function show(question $question)
     {
         return response()->json([
@@ -62,6 +75,10 @@ class QuestionsController extends Controller
      * @param  \App\question  $question
      * @return \Illuminate\Http\Response
      */
+
+    // 質問を更新するためのAPIエンドポイント
+    // Postman [ PUT Update Question ]
+
     public function update(AskQuestionRequest $request, Question $question)
     {
         $this->authorize("update", $question);
@@ -80,6 +97,10 @@ class QuestionsController extends Controller
      * @param  \App\question  $question
      * @return \Illuminate\Http\Response
      */
+
+    // 質問を削除するためのAPIエンドポイント
+    // Postman [ DELETE Delete Question ]
+    
     public function destroy(Question $question)
     {
         $this->authorize("delete", $question);

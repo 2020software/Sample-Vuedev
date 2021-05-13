@@ -15,6 +15,8 @@ class QuestionDetailsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    // 質問の詳細を表示するためのAPIエンドポイント
     public function __invoke(Question $question)
     {
         $question->increment('views');

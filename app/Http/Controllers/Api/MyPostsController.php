@@ -16,7 +16,7 @@ class MyPostsController extends Controller
     public function __invoke(Request $request)
     {
         return response()->json([
-            'data' => $request->user()->posts()
+            'data' => $request->user()->posts() // User.php の postsメソッド
         ]);
     }
 }

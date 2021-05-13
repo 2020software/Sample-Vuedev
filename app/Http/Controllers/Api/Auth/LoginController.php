@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -19,25 +19,6 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
-
     // 機密情報をユーザー側に置いておかないため
     public function store(Request $request)
     {
@@ -49,7 +30,7 @@ class LoginController extends Controller
         $request->request->add([
             'grant_type' => 'password',
             'client_id' => 2,
-            'clirnt_secret' => 'eJQhwDHd7VgEj6595axWPjyBLouiyu7VaYR0noQ5',
+            'client_secret' => 'eJQhwDHd7VgEj6595axWPjyBLouiyu7VaYR0noQ5',
             'username' => $request->username,
             'password' => $request->password,
         ]);

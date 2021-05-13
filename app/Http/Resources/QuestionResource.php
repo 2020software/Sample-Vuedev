@@ -17,7 +17,7 @@ class QuestionResource extends JsonResource
         return [
             'id'               => $this->id,
             'title'            => $this->title,
-            'slug'             => $this->id . '-' . $this->slug,
+            'slug'             => $this->id . '-' . $this->slug,    // URL
             'votes_count'      => $this->votes_count,
             'answers_count'    => $this->answers_count,
             'views'            => $this->views,
@@ -29,3 +29,5 @@ class QuestionResource extends JsonResource
         ];
     }
 }
+
+// API Resource は JSONレスポンスを返すときにJSONのdataを成形する物

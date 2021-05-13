@@ -67185,8 +67185,7 @@ var routes = [{
   name: 'home'
 }, {
   path: '/home',
-  component: _pages_QuestionsPage_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-  name: 'home'
+  component: _pages_QuestionsPage_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
 }, {
   path: '/questions',
   component: _pages_QuestionsPage_vue__WEBPACK_IMPORTED_MODULE_0__["default"],

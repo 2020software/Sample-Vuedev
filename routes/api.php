@@ -12,8 +12,10 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// Route::post('/token', 'Auth\LoginController@getToken');
 
 // @はメソッド呼び出し
+// CRUDのルーティングはapiResourceで一括設定
 
 Route::post('/login', 'Api\Auth\LoginController@store');
 Route::delete('/logout', 'Api\Auth\LoginController@destroy')->middleware('auth:api');
